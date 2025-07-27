@@ -1,16 +1,8 @@
-<h1 align="center">🚀 Wordpress Deployment with Ansible 🐘</h1>
+# 🚀 WordPress Deployment with Ansible + NGINX
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Automation-Ansible-179287?style=for-the-badge&logo=ansible&logoColor=white"/>
-  <img src="https://img.shields.io/badge/WebServer-Nginx-0db7ed?style=for-the-badge&logo=nginx&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Database-MariaDB-blue?style=for-the-badge"/>
-  <img src="https://img.shields.io/badge/OS-Ubuntu-6f42c1?style=for-the-badge&logo=ubuntu"/>
-</p>
+This project automates the deployment of a fully functional **WordPress website** using **Ansible**, served by **NGINX**, and backed by **MySQL**.
 
----
-
-> 🧠 *Imagine deploying WordPress with a single playbook, no manual steps, no wasted time.*  
-> Welcome to infrastructure automation that works *out of the box*.
+> 🛠️ Ideal for DevOps learners, sysadmins, and engineers seeking automated LAMP/LEMP deployment.
 
 ---
 
@@ -27,19 +19,18 @@ This repo automates the deployment of a fully working **WordPress** website usin
 
 ---
 
-## ⚙️ Tech Stack
+## 📦 Tech Stack
 
-| Layer          | Technology   |
-|----------------|--------------|
-| OS             | Ubuntu 20.04 |
-| Automation     | Ansible      |
-| Web Server     | Nginx        |
-| Database       | MySQL        |
-| CMS            | WordPress    |
+- ✅ Ansible (Provisioning & Automation)
+- ✅ NGINX (Web Server)
+- ✅ MySQL (Database)
+- ✅ PHP (for WordPress)
+- ✅ Ubuntu (tested on 20.04+)
+- ✅ Git (version control)
 
 ---
 
-## 🛠️ Project Structure
+## 📁 Project Structure
 
 ```bash
 📁 wordpress-ansible/
@@ -47,4 +38,5 @@ This repo automates the deployment of a fully working **WordPress** website usin
 ├── templates/
 │   └── wp-config.php.j2            # Dynamic config template
 ├── project-vars                   # Variables file
+├── ansible-cfg                   # Main Ansible Configuration file
 └── README.md
