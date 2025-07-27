@@ -1,0 +1,95 @@
+---
+#For reference:-
+#https://cyso.cloud/docs/cloud/extra/how-to-install-wordpress-using-ansible/#step-2-making-it-a-lamp-server
+#https://github.com/do-community/ansible-playbooks/tree/master/wordpress-lamp_ubuntu1804
+
+#Play 01 - Install the requirements & dependencies
+
+- name: update OS and install all the dependencies
+  hosts: wordpress
+  become: yes
+  tasks:
+  - name: Update system packages "apt" and cache, then install the requirements
+    ansible.builtin.apt:
+      force_apt_get: yes
+      update_cache: yes
+      cache_valid_time: 3600
+
+  - name: install MySQL Database
+    ansible.builtin.apt:
+      name:
+      - mysql-server
+      - mysql-client
+      - python3-mysqldb
+      state: present
+      update_cache: yes
+
+  - name: install PHP and it's extensions
+    ansible.builtin.apt:
+      name:
+      - php
+      - php-mysql
+      - php-curl
+      - php-xml
+      - php-mbstring
+      - php-zip
+      - php-gd
+      - php-cli
+      - php-fpm
+      state: present
+      update_cache: yes
+
+  - name: Insatall Nginx web server
+    ansible.builtin.apt:
+      name: nginx
+      state: present
+      update_cache: yes
+
+  - name: Download and extract wordpress
+    ansible.builtin.unarchive:
+      src: https://wordpress.org/latest.tar.gz
+      dest: /var/www/
+      remote_src: yes
+      creates: /var/www/wordpress
+
+  - name: Set permissions for WordPress folder
+    file:
+      path: /var/www/wordpress
+      owner: www-data
+      group: www-data
+      recurse: yes
+
+#paly 02 - Make changes and set the billers to run the Project
+
+- name: Do the neccessary changes and makes the adjustments..
+  hosts: wordpress
+  become: yes
+  vars_files:
+  - project-vars
+  tasks:
+
+  - name: Starts & enabled MySQL DB service
+    service:
+      name: mysql
+      state: started
+      enabled: yes
+
+  - name: Create new db for wordpress
+    mysql_db:
+      name: wordpress
+      state: present
+
+  - name: Create a wordpress DB user
+    mysql_user:
+      name: "{{wordpress_user}}"
+      password: "{{wordpress_password}}"
+      priv: 'wordpress.*:ALL'
+      state: present
+
+  - name: Create wp-config.php contains sensitive and DB credentials. So, must keeps it flexible and secure.
+    template:
+      src: templates/wp-config.php.j2
+      dest: /var/www/wordpress/wp-config.php
+      owner: www-data
+      group: www-data
+      mode: '0644'

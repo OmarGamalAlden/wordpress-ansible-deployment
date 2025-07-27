@@ -1,0 +1,4 @@
+wordpress_user: "your_username"
+wordpress_password: "your_password"
+wordpress_db_name: wordpress
+wordpress_db_host: localhost
