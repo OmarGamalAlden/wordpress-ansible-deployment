@@ -1,4 +1,4 @@
-wordpress_user: "your_username"
-wordpress_password: "your_password"
+wordpress_user: omar
+wordpress_password: ads_np@100102
 wordpress_db_name: wordpress
 wordpress_db_host: localhost
