@@ -1,5 +1,3 @@
----
-
 ````markdown
 # 🚀 WordPress Deployment with Ansible + NGINX
 
