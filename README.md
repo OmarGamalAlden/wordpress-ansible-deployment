@@ -1,4 +1,3 @@
-````markdown
 # 🚀 WordPress Deployment with Ansible + NGINX
 
 This project automates the deployment of a fully functional **WordPress website** using **Ansible**, served by **NGINX**, and backed by **MySQL** — without relying on Docker or prebuilt images.
@@ -133,9 +132,3 @@ To avoid any misconfiguration or errors:
 ## 🌟 Contributions
 
 Contributions, issues, and feature requests are welcome! Feel free to fork and submit a PR if you’ve got improvements or ideas.
-
----
-
-```
-
-```
