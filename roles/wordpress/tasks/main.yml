@@ -1,0 +1,21 @@
+- name: Download and extract wordpress
+  ansible.builtin.unarchive:
+    src: https://wordpress.org/latest.tar.gz
+    dest: /var/www/
+    remote_src: yes
+    creates: /var/www/wordpress
+
+- name: Set permissions for WordPress folder
+  file:
+    path: /var/www/wordpress
+    owner: www-data
+    group: www-data
+    recurse: yes
+
+- name: Create wp-config.php contains sensitive and DB credentials. So, must keeps it flexible and secure.
+  template:
+    src: roles/wordpress/templates/wp-config.php.j2
+    dest: /var/www/wordpress/wp-config.php
+    owner: www-data
+    group: www-data
+    mode: '0644'

@@ -1,0 +1,26 @@
+- name: install MySQL Database
+  ansible.builtin.apt:
+    name:
+    - mysql-server
+    - mysql-client
+    - python3-mysqldb
+    state: present
+    update_cache: yes
+
+- name: Starts & enabled MySQL DB service
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+
+- name: Create new DB for wordpress
+  mysql_db:
+    name: wordpress
+    state: present
+
+- name: Create a wordpress DB user
+  mysql_user:
+    name: "{{wordpress_user}}"
+    password: "{{wordpress_password}}"
+    priv: 'wordpress.*:ALL'
+    state: present

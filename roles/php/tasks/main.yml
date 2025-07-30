@@ -1,0 +1,14 @@
+- name: install PHP and it's extensions
+  ansible.builtin.apt:
+    name:
+    - php
+    - php-mysql
+    - php-curl
+    - php-xml
+    - php-mbstring
+    - php-zip
+    - php-gd
+    - php-cli
+    - php-fpm
+    state: present
+    update_cache: yes
